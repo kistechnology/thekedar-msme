@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thekedar MSME - Quotation Management System
+
+A Next.js 15 admin panel for Indian MSME manufacturing factories, focused on quotation template management.
+
+## Features
+
+✅ **Quotation Template Management**
+- Create and manage reusable quotation templates
+- Configure company details, items, terms & conditions
+- Preview templates before saving
+- Auto-generated logos from company name initials
+
+✅ **Item Management**
+- Define standard items/components with codes and drawings
+- Upload custom images or select from asset library
+- Auto-correction for item codes and descriptions
+
+✅ **Terms & Conditions**
+- Pre-configured standard terms
+- Configurable values (percentages, days, etc.)
+- Custom terms per category
+- Auto-correction and spell checking
+
+✅ **Template Preview**
+- Live preview of quotation layout
+- Multiple header/footer template options
+- Real-time updates as you type
+
+✅ **Professional UI**
+- Mobile-first WhatsApp-like design
+- Clean admin panel interface
+- Responsive layout
+
+## Tech Stack
+
+- **Next.js 15** (App Router)
+- **Refine** (MIT OSS) + **Mantine UI**
+- **TailwindCSS** + **shadcn/ui**
+- **Zustand** (State Management)
+- **TypeScript**
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 
-To learn more about Next.js, take a look at the following resources:
+**Quick Deploy to Vercel:**
+1. Push code to GitHub
+2. Import project in Vercel
+3. Deploy automatically
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+thekedar-msme/
+├── app/                    # Next.js pages
+│   ├── templates/         # Template management pages
+│   └── page.tsx           # Dashboard
+├── components/            # React components
+│   ├── layout/           # Layout components
+│   └── quotation/       # Quotation components
+├── lib/                   # Utilities and stores
+│   ├── stores/           # Zustand stores
+│   ├── data/             # Static data
+│   └── utils/            # Helper functions
+├── types/                 # TypeScript types
+└── public/               # Static assets
+    └── assets/images/    # Item drawing images
+```
 
-## Deploy on Vercel
+## Data Storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All data is stored locally in the browser using:
+- **Zustand** for state management
+- **localStorage** for persistence
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No backend or database required!
+
+## License
+
+Private project - All rights reserved

@@ -1,0 +1,3 @@
+# Place your item drawing images here
+# Supported formats: PNG, JPEG, JPG
+# Update lib/utils/imageAssets.ts to add image filenames to the availableItemDrawings array
