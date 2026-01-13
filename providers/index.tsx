@@ -6,6 +6,7 @@ import { Notifications } from "@mantine/notifications";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import routerProvider from "@refinedev/nextjs-router/app";
+import { Suspense, useEffect, useState } from "react";
 
 // Since we're frontend-only, we'll create a simple data provider
 // This will be replaced with Zustand/localStorage integration later
@@ -21,28 +22,50 @@ const dataProvider: any = {
 };
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <MantineProvider theme={RefineThemes.Blue as any}>
       <ModalsProvider>
-        <Refine
-          routerProvider={routerProvider}
-          dataProvider={dataProvider as any}
-          resources={[
-            {
-              name: "templates",
-              list: "/templates",
-              create: "/templates/create",
-              edit: "/templates/edit/:id",
-            },
-          ]}
-          options={{
-            syncWithLocation: true,
-            warnWhenUnsavedChanges: true,
-          }}
-        >
-          <Notifications position="top-right" />
-          {children}
-        </Refine>
+        {isClient ? (
+          <Refine
+            routerProvider={routerProvider}
+            dataProvider={dataProvider as any}
+            resources={[
+              {
+                name: "templates",
+                list: "/templates",
+                create: "/templates/create",
+                edit: "/templates/edit/:id",
+              },
+            ]}
+            options={{
+              syncWithLocation: false,
+              warnWhenUnsavedChanges: true,
+            }}
+          >
+            <Notifications position="top-right" />
+            <Suspense fallback={
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                <div>Loading...</div>
+              </div>
+            }>
+              {children}
+            </Suspense>
+          </Refine>
+        ) : (
+          <Suspense fallback={
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+              <div>Loading...</div>
+            </div>
+          }>
+            {children}
+          </Suspense>
+        )}
       </ModalsProvider>
     </MantineProvider>
   );

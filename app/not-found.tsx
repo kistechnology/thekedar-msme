@@ -3,8 +3,9 @@
 import { Button, Paper, Text, Stack } from "@mantine/core";
 import MainLayout from "@/components/layout/MainLayout";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function NotFound() {
+function NotFoundContent() {
   return (
     <MainLayout>
       <Paper p="xl" radius="md" withBorder>
@@ -21,5 +22,17 @@ export default function NotFound() {
         </Stack>
       </Paper>
     </MainLayout>
+  );
+}
+
+export default function NotFound() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <Text>Loading...</Text>
+      </div>
+    }>
+      <NotFoundContent />
+    </Suspense>
   );
 }
